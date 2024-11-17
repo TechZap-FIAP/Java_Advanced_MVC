@@ -1,7 +1,7 @@
 package br.com.fiap.techzap.model;
 
-import br.com.fiap.techzap.controller.dtos.solarPlateRegister.SolarPlateRegisterDTO;
-import br.com.fiap.techzap.controller.dtos.solarPlateRegister.SolarPlateUpdateDTO;
+import br.com.fiap.techzap.controller.dtos.solarPlate.SolarPlateRegisterDTO;
+import br.com.fiap.techzap.controller.dtos.solarPlate.SolarPlateUpdateDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

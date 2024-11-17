@@ -1,4 +1,4 @@
-package br.com.fiap.techzap.controller.dtos.solarPlateRegister;
+package br.com.fiap.techzap.controller.dtos.solarPlate;
 
 import br.com.fiap.techzap.controller.dtos.solarPlateType.SolarPlateTypeDetailedDTO;
 import br.com.fiap.techzap.model.SolarPlate;

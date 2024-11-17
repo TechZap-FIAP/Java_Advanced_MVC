@@ -1,13 +1,14 @@
-package br.com.fiap.techzap.controller.dtos.solarPlateRegister;
+package br.com.fiap.techzap.controller.dtos.turbineWind;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public record SolarPlateRegisterDTO(
+public record TurbineWindRegisterDTO(
 
         @NotNull double size,
         @NotNull double price,
         @NotBlank String material,
-        @NotNull Long idSolarPlateType
+        @NotNull Long idTypeTurbine
+
 ) {
 }

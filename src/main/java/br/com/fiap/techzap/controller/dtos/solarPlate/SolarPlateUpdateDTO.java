@@ -1,4 +1,4 @@
-package br.com.fiap.techzap.controller.dtos.solarPlateRegister;
+package br.com.fiap.techzap.controller.dtos.solarPlate;
 
 public record SolarPlateUpdateDTO(
 

@@ -1,8 +1,8 @@
 package br.com.fiap.techzap.service;
 
-import br.com.fiap.techzap.controller.dtos.solarPlateRegister.SolarPlateDetailedDTO;
-import br.com.fiap.techzap.controller.dtos.solarPlateRegister.SolarPlateRegisterDTO;
-import br.com.fiap.techzap.controller.dtos.solarPlateRegister.SolarPlateUpdateDTO;
+import br.com.fiap.techzap.controller.dtos.solarPlate.SolarPlateDetailedDTO;
+import br.com.fiap.techzap.controller.dtos.solarPlate.SolarPlateRegisterDTO;
+import br.com.fiap.techzap.controller.dtos.solarPlate.SolarPlateUpdateDTO;
 import br.com.fiap.techzap.model.SolarPlate;
 import br.com.fiap.techzap.model.SolarPlateType;
 import br.com.fiap.techzap.repository.SolarPlateRepository;

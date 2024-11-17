@@ -32,7 +32,7 @@ public class SolarPlateTypeController {
         SolarPlateType plateType = solarPlateTypeService.create(solarPlateTypeRegisterDTO);
 
         URI uri = uriBuilder.path("api/solar_plate_type").buildAndExpand(plateType.getIdTypeSolarBoard()).toUri();
-        redirectAttributes.addFlashAttribute("solarPlateType", plateType);
+        redirectAttributes.addFlashAttribute("solarPlateType", "Tipo de Placa Solar criada com sucesso!");
         return "redirect:/solar_plate_type/list";
     }
 

@@ -31,7 +31,7 @@ public class AdditionalDataController {
     public String create(@Valid AdditionalDataRegisterDTO additionalDataRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         AdditionalData additionalData = additionalDataService.create(additionalDataRegisterDTO);
         URI uri = uriBuilder.path("/api/additional_data").buildAndExpand(additionalData.getIdAdditionalData()).toUri();
-        redirectAttributes.addFlashAttribute("message", "Informações adicionais salvas com sucesso!");
+        redirectAttributes.addFlashAttribute("message", "Informações adicionais criada com sucesso!");
         return "redirect:/additional_data/list";
     }
 
