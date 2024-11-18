@@ -63,4 +63,5 @@ public class UserService {
 
     }
 
+    public User findById(int id) { return userRepository.findById(id); }
 }
