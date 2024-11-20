@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "T_TZ_TYPE_SOLAR_BOARD")
+@Table(name = "T_TZ_SOLAR_PANEL_TYPE")
 public class SolarPlateType {
 
-    @Column(name = "id_type_solar_board")
+    @Column(name = "id_solar_plate_type")
     @Id
     private Long idTypeSolarBoard;
 

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "T_TZ_SOLAR_BOARD")
+@Table(name = "T_TZ_SOLAR_PANEL")
 public class SolarPlate {
 
     @Column(name = "id_solar_board")

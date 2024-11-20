@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "T_TZ_TURBINE_TYPE")
+@Table(name = "T_TZ_WIND_TURBINE_TYPE")
 public class TypeTurbine {
 
     @Column(name = "id_type_turbine ")

@@ -21,7 +21,7 @@ public class TurbineWind {
     @Column(name = "ds_material")
     private String material;
 
-    @Column(name = "vl_siza")
+    @Column(name = "vl_size")
     private double size ;
 
     @Column(name = "vl_price")
