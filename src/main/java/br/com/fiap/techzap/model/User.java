@@ -5,6 +5,7 @@ import br.com.fiap.techzap.controller.dtos.user.UserUpdateDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
 import java.util.function.Supplier;
 
 @Entity
@@ -30,9 +31,9 @@ public class User {
     @Column(name = "ds_password")
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_additional_data")
-    private AdditionalData additionaldata;
+//    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "id_additional_data")
+//    private AdditionalData additionaldata;
 
     public User(UserRegisterDTO userRegisterDTO){
         this.name = userRegisterDTO.name();
@@ -58,13 +59,6 @@ public class User {
             this.password = userUpdateDTO.password();
         }
 
-    }
-
-    public User orElseThrow(Supplier<? extends RuntimeException> exceptionSupplier) {
-        if (this == null) {
-            throw exceptionSupplier.get();
-        }
-        return this;
     }
 
 }

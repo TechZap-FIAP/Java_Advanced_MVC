@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Controller
-@RequestMapping("/api/additional_data")
+@RequestMapping("/additional-data")
 public class AdditionalDataController {
 
     private final AdditionalDataService additionalDataService;
@@ -29,17 +29,16 @@ public class AdditionalDataController {
 
     @PostMapping
     public String create(@Valid AdditionalDataRegisterDTO additionalDataRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        AdditionalData additionalData = additionalDataService.create(additionalDataRegisterDTO);
-        URI uri = uriBuilder.path("/api/additional_data").buildAndExpand(additionalData.getIdAdditionalData()).toUri();
+        additionalDataService.create(additionalDataRegisterDTO);
         redirectAttributes.addFlashAttribute("message", "Informações adicionais criada com sucesso!");
-        return "redirect:/additional_data/list";
+        return "redirect:/additional-data/list";
     }
 
     @GetMapping
     public ModelAndView list(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         Page<AdditionalDataDetailedDTO> page = additionalDataService.list(pageable);
-        ModelAndView modelAndView = new ModelAndView("additional_data/list");
-        modelAndView.addObject("additional_data", page.getContent());
+        ModelAndView modelAndView = new ModelAndView("additional-data/list");
+        modelAndView.addObject("additional-data", page.getContent());
         modelAndView.addObject("totalPages", page.getTotalPages());
         modelAndView.addObject("currentPage", pageable.getPageNumber());
         return modelAndView;
@@ -48,8 +47,8 @@ public class AdditionalDataController {
     @GetMapping("/{id}")
     public ModelAndView show(@PathVariable Long id) {
         AdditionalDataDetailedDTO additionalDataDetailedDTO = additionalDataService.get(id);
-        ModelAndView modelAndView = new ModelAndView("additional_data/edit");
-        modelAndView.addObject("additional_data", additionalDataDetailedDTO);
+        ModelAndView modelAndView = new ModelAndView("additional-data/edit");
+        modelAndView.addObject("additional-data", additionalDataDetailedDTO);
         return modelAndView;
     }
 
@@ -57,14 +56,14 @@ public class AdditionalDataController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         additionalDataService.delete(id);
         redirectAttributes.addFlashAttribute("message", "Informações adicionais deletados com sucesso!");
-        return "redirect:/additional_data/list";
+        return "redirect:/additional-data/list";
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id, @RequestBody AdditionalDataUpdateDTO additionalDataUpdateDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         AdditionalDataDetailedDTO additionalDataDetailedDTO = additionalDataService.update(id, additionalDataUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "Informações adicionais atualizado com sucesso!");
-        return "redirect:/additional_data/list";
+        return "redirect:/additional-data/list";
     }
 
 }

@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Controller
-@RequestMapping("/api/type_turbine")
+@RequestMapping("/type-turbine")
 public class TypeTurbineController {
 
     private final TypeTurbineService typeTurbineService;
@@ -29,16 +29,16 @@ public class TypeTurbineController {
     public String create(@Valid TypeTurbineRegisterDTO typeTurbineRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         TypeTurbine typeTurbine = typeTurbineService.create(typeTurbineRegisterDTO);
 
-        URI uri = uriBuilder.path("api/type_turbine").buildAndExpand(typeTurbine.getIdTypeTurbine()).toUri();
-        redirectAttributes.addFlashAttribute("type_turbine", "Tipo de Turbina criada com sucesso!");
-        return "redirect:/type_turbine/list";
+        URI uri = uriBuilder.path("/type-turbine").buildAndExpand(typeTurbine.getIdTypeTurbine()).toUri();
+        redirectAttributes.addFlashAttribute("type-turbine", "Tipo de Turbina criada com sucesso!");
+        return "redirect:/type-turbine/list";
     }
 
     @GetMapping
     public ModelAndView list(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         Page<TypeTurbineDetailedDTO> page = typeTurbineService.list(pageable);
-        ModelAndView modelAndView = new ModelAndView("type_turbine/list");
-        modelAndView.addObject("type_turbine", page.getContent());
+        ModelAndView modelAndView = new ModelAndView("type-turbine/list");
+        modelAndView.addObject("type-turbine", page.getContent());
         modelAndView.addObject("totalPages", page.getTotalPages());
         modelAndView.addObject("currentPage", pageable.getPageNumber() );
         return modelAndView;
@@ -47,8 +47,8 @@ public class TypeTurbineController {
     @GetMapping("/{id}")
     public ModelAndView show(@PathVariable Long id) {
         TypeTurbineDetailedDTO typeTurbineDetailedDTO = typeTurbineService.get(id);
-        ModelAndView modelAndView = new ModelAndView("type_turbine/edit");
-        modelAndView.addObject("type_turbine", typeTurbineDetailedDTO);
+        ModelAndView modelAndView = new ModelAndView("type-turbine/edit");
+        modelAndView.addObject("type-turbine", typeTurbineDetailedDTO);
         return modelAndView;
     }
 
@@ -56,14 +56,14 @@ public class TypeTurbineController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         typeTurbineService.delete(id);
         redirectAttributes.addFlashAttribute("message", "Tipo de Turbina deletada com successo!");
-        return "redirect:/type_turbine/list";
+        return "redirect:/type-turbine/list";
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id, @RequestBody TypeTurbineUpdateDTO typeTurbineUpdateDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         TypeTurbineDetailedDTO typeTurbineDetailedDTO = typeTurbineService.update(id, typeTurbineUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "Tipo de Turbina editada com sucesso!");
-        return "redirect:/type_turbine/list";
+        return "redirect:/type-turbine/list";
     }
 
 }

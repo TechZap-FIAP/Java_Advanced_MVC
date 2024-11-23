@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}"></head>
+<body class="text-light">
+    <style>
+        body{
+            height: 100%;
+        }
+        main{
+            height: 50vh;
+        }
+
+        .content-login{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+        form{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .input-box{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+        }
+    </style>
+    <header th:replace="~{layout :: header_page}"></header>
+    <main class="container my-5">
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="content-login w-50 col-12 text-center">
+                <h1>Faça Login na TechZap</h1>
+
+                <div class="alert alert-danger" th:if="${param.error}">
+                    Não foi possível realizar o login. Verifique as credenciais e tente novamente.
+                </div>
+
+                <div class="alert alert-success" th:if="${param.logout}">
+                    Logout realizado com sucesso.
+                </div>
+
+                <form th:action="@{/auth/login}" method="post">
+                    <div class="input-box mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@mail.com" required>
+                    </div>
+                    <div class="input-box mb-3">
+                        <label for="password" class="form-label">Senha</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Informe a senha" required>
+                    </div>
+                    <button type="submit" class="w-100 btn btn-primary">Entrar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{layout :: footer_page}"></footer>
+</body>
+</html>

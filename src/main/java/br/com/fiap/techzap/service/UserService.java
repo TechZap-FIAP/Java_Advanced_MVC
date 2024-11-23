@@ -8,60 +8,45 @@ import br.com.fiap.techzap.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 
 @Service
-public class UserService {
-
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+public class UserService implements UserDetailsService {
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private UserRepository userRepository;
 
-    public User find(Long id) {
-        return userRepository.findById(id).get();
-    }
-
-    public User create(UserRegisterDTO userRegisterDTO){
-        User user = new User(userRegisterDTO);
-        user.setName(userRegisterDTO.name());
-        user.setEmail(userRegisterDTO.email());
-        user.setPassword(passwordEncoder.encode(userRegisterDTO.password()));
-        return userRepository.save(user);
-    }
-
-    public Page<UserDetailedDTO> list(Pageable pageable){
-        return userRepository.findAll(pageable).map(UserDetailedDTO::new);
-    }
-
-    public UserDetailedDTO get(Long id){
-        return new UserDetailedDTO(userRepository.findById(id).get());
-    }
-
-    public void delete(Long id){
-        User user = userRepository.findById(id).get();
-        userRepository.delete(user);
-    }
-
-    public UserDetailedDTO update(Long id, UserUpdateDTO userUpdateDTO){
-        User user = userRepository.findById(id).get();
-
-        user.updateInformation(userUpdateDTO);
-
-        if (userUpdateDTO.password() != null && !passwordEncoder.matches(userUpdateDTO.password(), user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(userUpdateDTO.password()));
-        }
+    public void saveUser(User user) {
         userRepository.save(user);
-
-        return new UserDetailedDTO(user);
-
     }
 
-    public User findById(int id) { return userRepository.findById(id); }
+    public User findByEmail(String email) { return userRepository.findByEmail(email); }
+
+    public User findById(Long id) {
+        return userRepository.findByIdUser(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Usuário não encontrado!");
+        }
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                new ArrayList<>());
+    }
 }

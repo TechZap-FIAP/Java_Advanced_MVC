@@ -1,0 +1,91 @@
+:root {
+    --color-dark-blue: #020E25;
+    --color-mid-dark-blue: #00439C;
+    --color-mid-blue: #0353AF;
+    --color-mid-lite-blue: #0663C2;
+    --color-grey: #C4C4C4;
+    --color-lite-grey: #E6E6E6;
+    --color-white: #FFFFFF;
+    --color-dark: #000000;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-grey);
+    background-color: var(--color-dark-blue) !important;
+    user-select: none;
+}
+
+.hamburguer-button {
+    border: 3px solid !important; /* Enhanced contrast */
+}
+
+.navbar-content {
+    background: var(--color-mid-dark-blue) !important;
+}
+
+.nav-text {
+    color: var(--color-grey) !important;
+    font-weight: bold !important;
+}
+
+.nav-text:hover {
+    color: var(--color-white) !important;
+}
+
+/* Additional styles for sections */
+main {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: var(--color-white);
+}
+
+p {
+    color: var(--color-grey);
+}
+
+button {
+    background-color: var(--color-mid-blue);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--color-mid-lite-blue);
+}
+
+.product-item-image {
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 300px; /* Defina um limite máximo de altura */
+    width: 100%; /* A imagem ocupa toda a largura do contêiner */
+    object-fit: contain; /* Cobre o espaço do contêiner sem distorcer a imagem */
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-mid-dark-blue);
+    padding: 20px;
+    color: var(--color-white);
+}
+
+footer a {
+    color: var(--color-grey);
+}
+
+footer a:hover {
+    color: var(--color-white);
+}
+
+/*
+Team Page
+*/
+

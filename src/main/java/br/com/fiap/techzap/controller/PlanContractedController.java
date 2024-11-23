@@ -24,27 +24,26 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Controller
-@RequestMapping("/api/plan_contracted")
+@RequestMapping("/plan-contracted")
 public class PlanContractedController {
 
-    private PlanContractedService planContractedService;
+    private final PlanContractedService planContractedService;
 
     @Autowired
     public PlanContractedController(PlanContractedService planContractedService) { this.planContractedService = planContractedService; }
 
     @PostMapping
     public String create (@Valid PlanContractedRegisterDTO planContractedRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        PlanContracted planContracted = planContractedService.create(planContractedRegisterDTO);
-        URI uri = uriBuilder.path("/api/plan_contracted").buildAndExpand(planContracted.getIdPlanContracted()).toUri();
+        planContractedService.create(planContractedRegisterDTO);
         redirectAttributes.addFlashAttribute("message", "Plano contratado com sucesso!");
-        return "redirect:/plan_contracted/list";
+        return "redirect:/plan-contracted/list";
     }
 
     @GetMapping
     public ModelAndView list(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         Page<PlanContractedDetailedDTO> page = planContractedService.list(pageable);
-        ModelAndView modelAndView = new ModelAndView("plan_contracted/list");
-        modelAndView.addObject("plan_contracted", page.getContent());
+        ModelAndView modelAndView = new ModelAndView("plan-contracted/list");
+        modelAndView.addObject("plan-contracted", page.getContent());
         modelAndView.addObject("totalPages", page.getTotalPages());
         modelAndView.addObject("currentPage", pageable.getPageNumber());
         return modelAndView;
@@ -53,8 +52,8 @@ public class PlanContractedController {
     @GetMapping("/{id}")
     public ModelAndView show(@PathVariable Long id) {
         PlanContractedDetailedDTO planContractedDetailedDTO = planContractedService.get(id);
-        ModelAndView modelAndView = new ModelAndView("plan_contracted/edit");
-        modelAndView.addObject("plan_contracted", planContractedDetailedDTO);
+        ModelAndView modelAndView = new ModelAndView("plan-contracted/edit");
+        modelAndView.addObject("plan-contracted", planContractedDetailedDTO);
         return modelAndView;
     }
 
@@ -62,14 +61,14 @@ public class PlanContractedController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         planContractedService.delete(id);
         redirectAttributes.addFlashAttribute("message", "Plano cancelado com sucesso!");
-        return "redirect:/plan_contracted/list";
+        return "redirect:/plan-contracted/list";
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id, @RequestBody PlanContractedUpdateDTO planContractedUpdateDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         PlanContractedDetailedDTO planContractedDetailedDTO = planContractedService.update(id, planContractedUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "Plano atualizado com sucesso!");
-        return "redirect:/plan_contracted/list";
+        return "redirect:/plan-contracted/list";
     }
 
 }

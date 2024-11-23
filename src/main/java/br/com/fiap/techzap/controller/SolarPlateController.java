@@ -19,10 +19,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Controller
-@RequestMapping("/api/solar_plate")
+@RequestMapping("/solar-plate")
 public class SolarPlateController {
 
-    private SolarPlateService solarPlateService;
+    private final SolarPlateService solarPlateService;
 
     @Autowired
     public SolarPlateController(SolarPlateService solarPlateService) { this.solarPlateService = solarPlateService; }
@@ -30,16 +30,16 @@ public class SolarPlateController {
     @PostMapping
     public String create (@Valid SolarPlateRegisterDTO solarPlateRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         SolarPlate solarPlate = solarPlateService.create(solarPlateRegisterDTO);
-        URI uri = uriBuilder.path("/api/solar_plate").buildAndExpand(solarPlate.getIdSolarPlate()).toUri();
+        URI uri = uriBuilder.path("/solar-plate").buildAndExpand(solarPlate.getIdSolarPlate()).toUri();
         redirectAttributes.addFlashAttribute("message", "Placa Solar criada com sucesso!");
-        return "redirect:/solar_plate/list";
+        return "redirect:/solar-plate/list";
     }
 
     @GetMapping
     public ModelAndView list(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         Page<SolarPlateDetailedDTO> page = solarPlateService.list(pageable);
-        ModelAndView modelAndView = new ModelAndView("solar_plate/list");
-        modelAndView.addObject("solar_plate", page.getContent());
+        ModelAndView modelAndView = new ModelAndView("solar-plate/list");
+        modelAndView.addObject("solar-plate", page.getContent());
         modelAndView.addObject("totalPages", page.getTotalPages());
         modelAndView.addObject("currentPage", pageable.getPageNumber());
         return modelAndView;
@@ -48,8 +48,8 @@ public class SolarPlateController {
     @GetMapping("/{id}")
     public ModelAndView show(@PathVariable Long id) {
         SolarPlateDetailedDTO solarPlateDetailedDTO = solarPlateService.get(id);
-        ModelAndView modelAndView = new ModelAndView("solar_plate/edit");
-        modelAndView.addObject("solar_plate", solarPlateDetailedDTO);
+        ModelAndView modelAndView = new ModelAndView("solar-plate/edit");
+        modelAndView.addObject("solar-plate", solarPlateDetailedDTO);
         return modelAndView;
     }
 
@@ -57,14 +57,14 @@ public class SolarPlateController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         solarPlateService.delete(id);
         redirectAttributes.addFlashAttribute("message", "Placa Solar deletada com sucesso!");
-        return "redirect:/solar_plate/list";
+        return "redirect:/solar-plate/list";
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id, @RequestBody SolarPlateUpdateDTO solarPlateUpdateDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         SolarPlateDetailedDTO solarPlateDetailedDTO = solarPlateService.update(id, solarPlateUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "Placa Solar atualizada com sucesso!");
-        return "redirect:/solar_plate/list";
+        return "redirect:/solar-plate/list";
     }
 
 }

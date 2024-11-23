@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Controller
-@RequestMapping("/api/solar_plate_type")
+@RequestMapping("/solar-plate-type")
 public class SolarPlateTypeController {
 
     private final SolarPlateTypeService solarPlateTypeService;
@@ -29,18 +29,16 @@ public class SolarPlateTypeController {
 
     @PostMapping
     public String create(@Valid SolarPlateTypeRegisterDTO solarPlateTypeRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        SolarPlateType plateType = solarPlateTypeService.create(solarPlateTypeRegisterDTO);
-
-        URI uri = uriBuilder.path("api/solar_plate_type").buildAndExpand(plateType.getIdTypeSolarBoard()).toUri();
+        solarPlateTypeService.create(solarPlateTypeRegisterDTO);
         redirectAttributes.addFlashAttribute("solarPlateType", "Tipo de Placa Solar criada com sucesso!");
-        return "redirect:/solar_plate_type/list";
+        return "redirect:/solar-plate-type/list";
     }
 
     @GetMapping
     public ModelAndView list(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         Page<SolarPlateTypeDetailedDTO> page = solarPlateTypeService.list(pageable);
-        ModelAndView modelAndView = new ModelAndView("solar_plate_type/list");
-        modelAndView.addObject("solar_plate_type", page.getContent());
+        ModelAndView modelAndView = new ModelAndView("solar-plate-type/list");
+        modelAndView.addObject("solar-plate-type", page.getContent());
         modelAndView.addObject("totalPages", page.getTotalPages());
         modelAndView.addObject("currentPage", pageable.getPageNumber() );
         return modelAndView;
@@ -49,7 +47,7 @@ public class SolarPlateTypeController {
     @GetMapping("/{id}")
     public ModelAndView show(@PathVariable Long id) {
         SolarPlateTypeDetailedDTO solarPlateTypeDetailedDTO = solarPlateTypeService.get(id);
-        ModelAndView modelAndView = new ModelAndView("solar_plate_type/edit");
+        ModelAndView modelAndView = new ModelAndView("solar-plate-type/edit");
         modelAndView.addObject("solarPlateType", solarPlateTypeDetailedDTO);
         return modelAndView;
     }
@@ -58,14 +56,14 @@ public class SolarPlateTypeController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         solarPlateTypeService.delete(id);
         redirectAttributes.addFlashAttribute("message", "Tipo de Placa Solar deletada com successo!");
-        return "redirect:/solar_plate_type/list";
+        return "redirect:/solar-plate-type/list";
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id, @RequestBody SolarPlateTypeUpdateDTO solarPlateTypeUpdateDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         SolarPlateTypeDetailedDTO solarPlateTypeDetailedDTO = solarPlateTypeService.update(id, solarPlateTypeUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "Tipo de Placa Solar editada com sucesso!");
-        return "redirect:/solar_plate_type/list";
+        return "redirect:/solar-plate-type/list";
     }
 
 }

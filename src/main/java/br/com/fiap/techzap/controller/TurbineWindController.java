@@ -24,27 +24,26 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Controller
-@RequestMapping("/api/turbine_wind")
+@RequestMapping("/turbine-wind")
 public class TurbineWindController {
 
-    private TurbineWindService turbineWindService;
+    private final TurbineWindService turbineWindService;
 
     @Autowired
-    public TurbineWindController(TurbineWindService solarPlateService) { this.turbineWindService = solarPlateService; }
+    public TurbineWindController(TurbineWindService turbineWindService) { this.turbineWindService = turbineWindService; }
 
     @PostMapping
     public String create (@Valid TurbineWindRegisterDTO turbineWindRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        TurbineWind turbineWind = turbineWindService.create(turbineWindRegisterDTO);
-        URI uri = uriBuilder.path("/api/turbine_wind").buildAndExpand(turbineWind.getIdTurbinaWind()).toUri();
+        turbineWindService.create(turbineWindRegisterDTO);
         redirectAttributes.addFlashAttribute("message", "Turbina Eólica criada com sucesso!");
-        return "redirect:/turbine_wind/list";
+        return "redirect:/turbine-wind/list";
     }
 
     @GetMapping
     public ModelAndView list(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         Page<TurbineWindDetailedDTO> page = turbineWindService.list(pageable);
-        ModelAndView modelAndView = new ModelAndView("turbine_wind/list");
-        modelAndView.addObject("turbine_wind", page.getContent());
+        ModelAndView modelAndView = new ModelAndView("turbine-wind/list");
+        modelAndView.addObject("turbine-wind", page.getContent());
         modelAndView.addObject("totalPages", page.getTotalPages());
         modelAndView.addObject("currentPage", pageable.getPageNumber());
         return modelAndView;
@@ -53,8 +52,8 @@ public class TurbineWindController {
     @GetMapping("/{id}")
     public ModelAndView show(@PathVariable Long id) {
         TurbineWindDetailedDTO turbineWindDetailedDTO = turbineWindService.get(id);
-        ModelAndView modelAndView = new ModelAndView("turbine_wind/edit");
-        modelAndView.addObject("turbine_wind", turbineWindDetailedDTO);
+        ModelAndView modelAndView = new ModelAndView("turbine-wind/edit");
+        modelAndView.addObject("turbine-wind", turbineWindDetailedDTO);
         return modelAndView;
     }
 
@@ -62,14 +61,14 @@ public class TurbineWindController {
     public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         turbineWindService.delete(id);
         redirectAttributes.addFlashAttribute("message", "Turbina Eólica deletada com sucesso!");
-        return "redirect:/turbine_wind/list";
+        return "redirect:/turbine-wind/list";
     }
 
     @PutMapping("/{id}")
     public String update(@PathVariable("id") Long id, @RequestBody TurbineWindUpdateDTO turbineWindUpdateDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         TurbineWindDetailedDTO turbineWindDetailedDTO = turbineWindService.update(id, turbineWindUpdateDTO);
         redirectAttributes.addFlashAttribute("message", "Turbina Eólica atualizada com sucesso!");
-        return "redirect:/turbine_wind/list";
+        return "redirect:/turbine-wind/list";
     }
 
 }

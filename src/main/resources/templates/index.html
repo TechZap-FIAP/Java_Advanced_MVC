@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}"></head>
+<body class="text-light">
+  <header th:replace="~{layout :: header_page}"></header>
+
+  <main>
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1>Bem-vindo a TechZap!</h1>
+          <p>Aqui você encontra a melhor solução de economia e sustentabilidade de energia para a sua residência</p>
+          <a class="btn btn-primary" th:href="@{/about}">Saiba mais</a>
+        </div>
+      </div>
+
+      <div class="row my-5">
+        <div class="col-12 text-center">
+          <h2>Produtos</h2>
+        </div>
+      </div>
+
+      <div class="row flex justify-content-center align-items-center">
+        <div class="col-md-4 mb-4">
+          <div class="product-container">
+            <img th:src="@{/images/turbinas/turbinas-com-helices.png}" alt="Ícone de Turbinas Eólicas" class="mb-3 product-item-image"/>
+            <h3>Turbinas Eólicas</h3>
+            <p>Gere sua própria energia com nossas turbinas eólicas de alta eficiência</p>
+            <a href="#" class="btn btn-primary">Solicite um orçamento!</a>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="product-container">
+            <img th:src="@{/images/paineis-solares/painel-solar.png}" alt="Ícone de Painel Solar" class="mb-3 product-item-image"/>
+            <h3>Turbinas Eólicas c/ Painéis Solares</h3>
+            <p>Gere sua própria energia com nossas turbinas eólicas unificadas com painéis solares de alta eficiência</p>
+            <a href="#" class="btn btn-primary">Solicite um orçamento!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer th:replace="~{layout :: footer_page}"></footer>
+</body>
+</html>

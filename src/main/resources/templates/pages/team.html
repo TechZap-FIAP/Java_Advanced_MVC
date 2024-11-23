@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}"></head>
+<body class="text-light">
+    <style>
+        .card{
+            width: 220px;
+            min-width: 80%;
+            height: 220px;
+
+            padding: 20px;
+            transition: all 0.6s;
+            background-color: #00439C;
+        }
+
+        .card:hover{
+            transform: scale(1.1);
+        }
+
+        .card-content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-img-top{
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+        }
+
+        .card-body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #E6E6E6;
+            padding: 5px;
+        }
+    </style>
+    <header th:replace="~{layout :: header_page}"></header>
+    <main>
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Conheça a nossa Equipe</h1>
+                    <p>Nosso time de profissionais altamente qualificados está pronto para atender você.</p>
+                </div>
+            </div>
+            <div class="row my-5 flex justify-content-center align-items-center">
+                <div class="col-md-4 mb-4 card-content">
+                    <div class="card flex justify-content-center align-items-center">
+                        <a th:href="@{https://www.linkedin.com/in/kaique-santos-64329a206}" th:target="_blank">
+                            <img th:src="@{/images/team/kaiquesantos.png}" class="card-img-top" alt="Foto do Kaique Santos">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">Kaique Santos</h5>
+                            <p class="card-text">Mobile Developer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 card-content">
+                    <div class="card flex justify-content-center align-items-center">
+                        <a th:href="@{https://www.linkedin.com/in/marceloamellopaixao}" th:target="_blank">
+                            <img th:src="@{/images/team/marceloamellopaixao.png}" class="card-img-top" alt="Foto do Marcelo Augusto">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">Marcelo Augusto</h5>
+                            <p class="card-text">FullStack Developer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 card-content">
+                    <div class="card flex justify-content-center align-items-center">
+                        <a th:href="@{https://www.linkedin.com/in/rodrigo-freire-batista}" th:target="_blank">
+                            <img th:src="@{/images/team/rodrigobatista.png}" class="card-img-top" alt="Foto do Rodrigo Batista">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">Rodrigo Batista</h5>
+                            <p class="card-text">Java Developer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 card-content">
+                    <div class="card flex justify-content-center align-items-center">
+                        <a th:href="@{https://www.linkedin.com/in/thiago-martins-564b2b189}" th:target="_blank">
+                            <img th:src="@{/images/team/thiagomartins.png}" class="card-img-top" alt="Foto do Thiago Martins">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">Thiago Martins</h5>
+                            <p class="card-text">Project Manager & QA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 card-content">
+                    <div class="card flex justify-content-center align-items-center">
+                        <a th:href="@{https://www.linkedin.com/in/vinicius-oliveira-de-almeida-490864217}" th:target="_blank">
+                            <img th:src="@{/images/team/vinioalmeida.png}" class="card-img-top" alt="Foto do Vinicius Almeida">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">Vinicius Almeida</h5>
+                            <p class="card-text">Database Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{layout :: footer_page}"></footer>
+</body>
+</html>

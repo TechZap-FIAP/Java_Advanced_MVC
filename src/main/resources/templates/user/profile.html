@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: page_head}"></head>
+<body>
+<header th:replace="~{layout :: header_page}"></header>
+<main>
+    <div class="container my-5">
+        <h1 class="text-center">Perfil do Usuário</h1>
+        <form th:action="@{/user/profile/update}" method="post">
+            <input type="hidden" name="id" th:value="${user.id}" />
+            <div class="row my-4">
+                <div class="col-md-6">
+                    <label for="firstName" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="firstName" name="firstName" th:value="${user.firstName}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastName" class="form-label">Sobrenome</label>
+                    <input type="text" class="form-control" id="lastName" name="lastName" th:value="${user.lastName}" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" th:value="${user.email}" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Nova Senha (deixe em branco para não alterar)</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+
+            <h3>Dados Adicionais</h3>
+            <div class="mb-3">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" th:value="${user.cpf}" required>
+            </div>
+            <div class="mb-3">
+                <label for="birthDate" class="form-label">Data de Nascimento</label>
+                <input type="date" class="form-control" id="birthDate" name="birthDate" th:value="${#dates.format(user.birthDate, 'yyyy-MM-dd')}" required>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Número de Telefone</label>
+                <input type="tel" class="form-control" id="phone" name="phone" th:value="${user.phone}" required>
+            </div>
+
+            <h3>Endereço</h3>
+            <div class="mb-3">
+                <label for="street" class="form-label">Rua</label>
+                <input type="text" class="form-control" id="street" name="street" th:value="${user.address.street}" required>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="number" class="form-label">Número</label>
+                    <input type="text" class="form-control" id="number" name="number" th:value="${user.address.number}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="neighborhood" class="form-label">Bairro</label>
+                    <input type="text" class="form-control" id="neighborhood" name="neighborhood" th:value="${user.address.neighborhood}" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="city" class="form-label">Cidade</label>
+                    <input type="text" class="form-control" id="city" name="city" th:value="${user.address.city}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="state" class="form-label">Estado</label>
+                    <input type="text" class="form-control" id="state" name="state" th:value="${user.address.state}" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Atualizar Perfil</button>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{layout :: footer_page}"></footer>
+</body>
+</html>

@@ -5,6 +5,7 @@ import br.com.fiap.techzap.controller.dtos.planContracted.PlanContractedRegister
 import br.com.fiap.techzap.controller.dtos.planContracted.PlanContractedUpdateDTO;
 import br.com.fiap.techzap.model.*;
 import br.com.fiap.techzap.repository.PlanContractedRepository;
+import br.com.fiap.techzap.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class PlanContractedService {
     private final SolarPlateService solarPlateService;
     private final TurbineWindService turbineWindService;
 
-    public PlanContractedService(PlanContractedRepository planContractedRepository, UserService userService, SolarPlateService solarPlateService, TurbineWindService turbineWindService) {
+    public PlanContractedService(PlanContractedRepository planContractedRepository, UserService userService,
+                                 SolarPlateService solarPlateService, TurbineWindService turbineWindService) {
         this.planContractedRepository = planContractedRepository;
         this.userService = userService;
         this.solarPlateService = solarPlateService;
@@ -27,7 +29,7 @@ public class PlanContractedService {
     public PlanContracted findById(int id) { return planContractedRepository.findById(id); }
 
     public PlanContracted create(PlanContractedRegisterDTO planContractedRegisterDTO) {
-        User user = userService.findById(Math.toIntExact(planContractedRegisterDTO.idUser()));
+        User user = userService.findById(planContractedRegisterDTO.idUser());
         SolarPlate solarPlate = solarPlateService.findById(Math.toIntExact(planContractedRegisterDTO.idSolarPlate()));
         TurbineWind turbineWind = turbineWindService.findById(Math.toIntExact(planContractedRegisterDTO.idTurbineWind()));
 
@@ -47,7 +49,7 @@ public class PlanContractedService {
         return planContractedRepository.findAll(pageable).map(PlanContractedDetailedDTO::new);
     }
 
-    public PlanContractedDetailedDTO get (Long id){
+    public PlanContractedDetailedDTO get(Long id){
         return new PlanContractedDetailedDTO(planContractedRepository.findById(id).get());
     }
 

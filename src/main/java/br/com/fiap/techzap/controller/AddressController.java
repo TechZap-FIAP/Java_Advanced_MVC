@@ -19,7 +19,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @Controller
-@RequestMapping("/api/address")
+@RequestMapping("/address")
 public class AddressController {
 
     private final AddressService addressService;
@@ -29,9 +29,7 @@ public class AddressController {
 
     @PostMapping
     public String create(@Valid AddressRegisterDTO addressRegisterDTO, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
-        Address address = addressService.create(addressRegisterDTO);
-
-        URI uri = uriBuilder.path("api/address").buildAndExpand(address.getIdAddress()).toUri();
+        addressService.create(addressRegisterDTO);
         redirectAttributes.addFlashAttribute("message", "Endereço Criado com Sucesso!");
         return "redirect:/address/list";
     }

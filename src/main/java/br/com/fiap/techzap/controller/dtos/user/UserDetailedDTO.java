@@ -8,13 +8,11 @@ public record UserDetailedDTO(
         Long idUser,
         String name,
         String surname,
-        String email,
-        AdditionalDataDetailedDTO additionalData
+        String email
 ) {
 
     public UserDetailedDTO (User user) {
-        this(user.getIdUser(), user.getName(), user.getSurname(), user.getEmail(),
-                new AdditionalDataDetailedDTO(user.getAdditionaldata()));
+        this(user.getIdUser(), user.getName(), user.getSurname(), user.getEmail());
     }
 
 }
